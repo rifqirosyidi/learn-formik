@@ -36,8 +36,9 @@ const MyForm = () => {
     validate,
   });
 
-  console.log("VALUES :", formik.values);
-  console.log("ERROR :", formik.errors);
+  //   console.log("VALUES :", formik.values);
+  //   console.log("ERROR :", formik.errors);
+  console.log("TOUCH :", formik.touched);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -45,12 +46,13 @@ const MyForm = () => {
           <label htmlFor="name">Name</label>
           <input
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.name}
             type="text"
             name="name"
             id="name"
           />
-          {formik.errors.name && (
+          {formik.errors.name && formik.touched.address && (
             <div className="error">{formik.errors.name}</div>
           )}
         </div>
@@ -58,12 +60,13 @@ const MyForm = () => {
           <label htmlFor="email">Email</label>
           <input
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
             type="email"
             name="email"
             id="email"
           />
-          {formik.errors.email && (
+          {formik.errors.email && formik.touched.address && (
             <div className="error">{formik.errors.email}</div>
           )}
         </div>
@@ -71,12 +74,13 @@ const MyForm = () => {
           <label htmlFor="address">Address</label>
           <input
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.address}
             type="text"
             name="address"
             id="address"
           />
-          {formik.errors.address && (
+          {formik.errors.address && formik.touched.address && (
             <div className="error">{formik.errors.address}</div>
           )}
         </div>
