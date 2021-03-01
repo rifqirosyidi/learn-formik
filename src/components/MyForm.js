@@ -13,6 +13,7 @@ const initialValues = {
     github: "",
     twitter: "",
   },
+  friends: ["", ""],
 };
 
 const onSubmit = (values) => {
@@ -81,6 +82,16 @@ const MyForm = () => {
         <div className="form-control">
           <label htmlFor="twitter">Twitter Profile Url</label>
           <Field type="text" id="twitter" name="socials.twitter" />
+        </div>
+
+        {/* Array */}
+        <div className="form-control">
+          <label htmlFor="firstFriend">First Friend</label>
+          <Field type="text" id="firstFriend" name="friends[0]" />
+        </div>
+        <div className="form-control">
+          <label htmlFor="secondFriend">Second Friend</label>
+          <Field type="text" id="secondFriend" name="friends[1]" />
         </div>
 
         <button type="submit">Submit</button>
