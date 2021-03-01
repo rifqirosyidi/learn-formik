@@ -12,6 +12,24 @@ const onSubmit = (values) => {
   console.log("Form Data :", values);
 };
 
+// const validate = (values) => {
+//   let errors = {};
+//   if (!values.name) {
+//     errors.name = "Required";
+//   }
+
+//   if (!values.email) {
+//     errors.email = "Required";
+//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+//     errors.email = "Invalid email format";
+//   }
+
+//   if (!values.address) {
+//     errors.address = "Required";
+//   }
+//   return errors;
+// };
+
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   email: Yup.string().required("Required").email("Invalid email format"),
@@ -23,15 +41,21 @@ const MyForm = () => {
     initialValues,
     onSubmit,
     validationSchema,
+    // validate,
   });
 
+  //   console.log("VALUES :", formik.values);
+  //   console.log("ERROR :", formik.errors);
+  console.log("TOUCH :", formik.touched);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">Name</label>
           <input
-            {...formik.getFieldProps("name")}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.name}
             type="text"
             name="name"
             id="name"
@@ -43,7 +67,9 @@ const MyForm = () => {
         <div className="form-control">
           <label htmlFor="email">Email</label>
           <input
-            {...formik.getFieldProps("email")}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
             type="email"
             name="email"
             id="email"
@@ -55,7 +81,9 @@ const MyForm = () => {
         <div className="form-control">
           <label htmlFor="address">Address</label>
           <input
-            {...formik.getFieldProps("address")}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.address}
             type="text"
             name="address"
             id="address"
