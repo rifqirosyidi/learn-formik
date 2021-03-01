@@ -6,6 +6,8 @@ const initialValues = {
   name: "",
   email: "",
   address: "",
+  message: "",
+  phone: "",
 };
 
 const onSubmit = (values) => {
@@ -40,6 +42,26 @@ const MyForm = () => {
           <label htmlFor="address">Address</label>
           <Field type="text" name="address" id="address" />
           <ErrorMessage name="address" />
+        </div>
+        <div className="form-control">
+          <label htmlFor="message">Message</label>
+          <Field as="textarea" name="message" id="message" />
+          <ErrorMessage name="message" />
+        </div>
+        <div className="form-control">
+          <label htmlFor="phone">phone</label>
+          <Field name="phone">
+            {(props) => {
+              const { field, form, meta } = props;
+              return (
+                <div>
+                  <input type="text" id="phone" {...field}></input>
+                  {meta.error && meta.touched ? <div>{meta.error}</div> : null}
+                </div>
+              );
+            }}
+          </Field>
+          <ErrorMessage name="phone" />
         </div>
 
         <button type="submit">Submit</button>
