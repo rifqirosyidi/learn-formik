@@ -9,6 +9,10 @@ const initialValues = {
   address: "",
   message: "",
   phone: "",
+  socials: {
+    github: "",
+    twitter: "",
+  },
 };
 
 const onSubmit = (values) => {
@@ -57,7 +61,7 @@ const MyForm = () => {
           <label htmlFor="phone">phone</label>
           <Field name="phone">
             {(props) => {
-              const { field, form, meta } = props;
+              const { field, meta } = props;
               return (
                 <div>
                   <input type="text" id="phone" {...field}></input>
@@ -67,6 +71,16 @@ const MyForm = () => {
             }}
           </Field>
           <ErrorMessage name="phone" />
+        </div>
+
+        {/* Nested Properties */}
+        <div className="form-control">
+          <label htmlFor="github">Github Profile Url</label>
+          <Field type="text" id="github" name="socials.github" />
+        </div>
+        <div className="form-control">
+          <label htmlFor="twitter">Twitter Profile Url</label>
+          <Field type="text" id="twitter" name="socials.twitter" />
         </div>
 
         <button type="submit">Submit</button>
