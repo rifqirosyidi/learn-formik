@@ -35,35 +35,51 @@ const MyForm = () => {
     onSubmit,
     validate,
   });
+
+  console.log("VALUES :", formik.values);
+  console.log("ERROR :", formik.errors);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          type="text"
-          name="name"
-          id="name"
-        />
-
-        <label htmlFor="email">Email</label>
-        <input
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          type="email"
-          name="email"
-          id="email"
-        />
-
-        <label htmlFor="address">Address</label>
-        <input
-          onChange={formik.handleChange}
-          value={formik.values.address}
-          type="text"
-          name="address"
-          id="address"
-        />
+        <div className="form-control">
+          <label htmlFor="name">Name</label>
+          <input
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            type="text"
+            name="name"
+            id="name"
+          />
+          {formik.errors.name && (
+            <div className="error">{formik.errors.name}</div>
+          )}
+        </div>
+        <div className="form-control">
+          <label htmlFor="email">Email</label>
+          <input
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            type="email"
+            name="email"
+            id="email"
+          />
+          {formik.errors.email && (
+            <div className="error">{formik.errors.email}</div>
+          )}
+        </div>
+        <div className="form-control">
+          <label htmlFor="address">Address</label>
+          <input
+            onChange={formik.handleChange}
+            value={formik.values.address}
+            type="text"
+            name="address"
+            id="address"
+          />
+          {formik.errors.address && (
+            <div className="error">{formik.errors.address}</div>
+          )}
+        </div>
 
         <button type="submit">Submit</button>
       </form>
