@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const initialValues = {
   name: "",
@@ -11,29 +12,36 @@ const onSubmit = (values) => {
   console.log("Form Data :", values);
 };
 
-const validate = (values) => {
-  let errors = {};
-  if (!values.name) {
-    errors.name = "Required";
-  }
+// const validate = (values) => {
+//   let errors = {};
+//   if (!values.name) {
+//     errors.name = "Required";
+//   }
 
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email format";
-  }
+//   if (!values.email) {
+//     errors.email = "Required";
+//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+//     errors.email = "Invalid email format";
+//   }
 
-  if (!values.address) {
-    errors.address = "Required";
-  }
-  return errors;
-};
+//   if (!values.address) {
+//     errors.address = "Required";
+//   }
+//   return errors;
+// };
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  email: Yup.string().required("Required").email("Invalid email format"),
+  address: Yup.string().required("Required"),
+});
 
 const MyForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
+    validationSchema,
+    // validate,
   });
 
   //   console.log("VALUES :", formik.values);
@@ -52,9 +60,9 @@ const MyForm = () => {
             name="name"
             id="name"
           />
-          {formik.errors.name && formik.touched.address && (
+          {formik.errors.name && formik.touched.name ? (
             <div className="error">{formik.errors.name}</div>
-          )}
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="email">Email</label>
@@ -66,9 +74,9 @@ const MyForm = () => {
             name="email"
             id="email"
           />
-          {formik.errors.email && formik.touched.address && (
+          {formik.errors.email && formik.touched.email ? (
             <div className="error">{formik.errors.email}</div>
-          )}
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="address">Address</label>
@@ -80,9 +88,9 @@ const MyForm = () => {
             name="address"
             id="address"
           />
-          {formik.errors.address && formik.touched.address && (
+          {formik.errors.address && formik.touched.address ? (
             <div className="error">{formik.errors.address}</div>
-          )}
+          ) : null}
         </div>
 
         <button type="submit">Submit</button>
