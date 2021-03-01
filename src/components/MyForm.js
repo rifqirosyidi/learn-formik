@@ -8,12 +8,13 @@ const MyForm = () => {
       email: "",
       address: "",
     },
+    onSubmit: (values) => {
+      console.log("Form Data :", values);
+    },
   });
-
-  console.log(formik.values);
   return (
     <div>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <label htmlFor="name">Name</label>
         <input
           onChange={formik.handleChange}
@@ -41,7 +42,7 @@ const MyForm = () => {
           id="address"
         />
 
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
