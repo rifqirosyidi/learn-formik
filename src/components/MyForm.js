@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import MyErrorMessage from "./MyErrorMessage";
 
@@ -14,6 +14,7 @@ const initialValues = {
     twitter: "",
   },
   friends: ["", ""],
+  myFriends: [""],
 };
 
 const onSubmit = (values) => {
@@ -92,6 +93,36 @@ const MyForm = () => {
         <div className="form-control">
           <label htmlFor="secondFriend">Second Friend</label>
           <Field type="text" id="secondFriend" name="friends[1]" />
+        </div>
+
+        {/* FieldArray */}
+        <div className="form-control">
+          <label htmlFor="myFriends">My Friends</label>
+          <FieldArray id="myFriends" name="myFriends">
+            {(fieldArrProps) => {
+              const { push, remove, form } = fieldArrProps;
+              const { values } = form;
+              const { myFriends } = values;
+
+              return (
+                <div>
+                  {myFriends.map((fr, idx) => (
+                    <div key="index">
+                      <Field name={`myFriends[${idx}]`} />
+                      {idx > 0 && (
+                        <button type="button" onClick={() => remove(idx)}>
+                          -
+                        </button>
+                      )}
+                      <button type="button" onClick={() => push("")}>
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
         </div>
 
         <button type="submit">Submit</button>
